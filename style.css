@@ -1,0 +1,1021 @@
+/* =========================================
+   VARIABLES & RESET
+   ========================================= */
+:root {
+  /* White Sakura Theme Palette */
+  --bg-paper: #ffffff;
+  --bg-subtle: #f8f9fc;
+  --bg-gray: #f2f4f6;
+  --bg-dark: #1A1C20;
+  
+  --text-main: #191f28;   /* 吏꾪븳 李⑥퐳 */
+  --text-sub: #4e5968;    /* 遺��쒕윭�� �뚯깋 */
+  --text-muted: #8b95a1;
+  
+  /* Accents */
+  --sakura: #ff4f93;      /* Primary Pink */
+  --sakura-dim: rgba(255, 79, 147, 0.1);
+  --sakura-glow: rgba(255, 79, 147, 0.4);
+  --line: rgba(0, 0, 0, 0.06);
+
+  /* Layout */
+  --max-w: 1100px;
+  --header-h: 70px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  
+  /* Fonts */
+  --font-main: 'Pretendard', -apple-system, sans-serif;
+  --font-eng: 'Montserrat', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Noto Serif KR', serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-paper);
+  color: var(--text-main);
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; transition: 0.2s; }
+button { cursor: pointer; border: none; font-family: inherit; }
+ul { list-style: none; }
+
+/* Utilities */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; position: relative; }
+.text-center { text-align: center; }
+.pc-only { display: none; }
+.mob-only { display: block; }
+@media (min-width: 992px) {
+  .pc-only { display: flex; }
+  .mob-only { display: none; }
+}
+
+/* Typography Utils */
+.eng { font-family: var(--font-eng); letter-spacing: -0.01em; }
+.mono { font-family: var(--font-mono); letter-spacing: -0.03em; }
+.serif { font-family: var(--font-serif); }
+.text-sakura { color: var(--sakura); }
+
+/* Animation Utils */
+.reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+@keyframes blink { 50% { opacity: 0.5; } }
+.blink { animation: blink 1.5s infinite; }
+
+
+/* =========================================
+   BACKGROUND & HEADER
+   ========================================= */
+#flowCanvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1; pointer-events: none; opacity: 0.5;
+}
+
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  z-index: 1000;
+  display: flex; align-items: center;
+}
+.nav-inner { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: var(--font-eng); font-weight: 800; font-size: 1.3rem; display: flex; align-items: center; gap: 8px; color: var(--text-main); }
+.logo span { width: 10px; height: 10px; background: var(--sakura); border-radius: 50%; box-shadow: 0 0 12px var(--sakura); }
+
+.nav-links { gap: 32px; align-items: center; }
+.nav-links a { font-weight: 600; font-size: 0.95rem; color: var(--text-sub); }
+.nav-links a:hover { color: var(--sakura); }
+
+.nav-btn {
+  background: var(--text-main); color: #fff !important;
+  padding: 10px 24px; border-radius: 50px; font-size: 0.9rem;
+  transition: 0.3s;
+}
+.nav-btn:hover { background: var(--sakura); transform: translateY(-2px); }
+
+.menu-btn { width: 30px; height: 20px; position: relative; background: none; }
+.menu-btn span { position: absolute; left: 0; width: 100%; height: 2px; background: #000; top: 9px; }
+.menu-btn span:first-child { top: 0; }
+.menu-btn span:last-child { top: 18px; }
+
+
+/* =========================================
+   SECTIONS
+   ========================================= */
+.section { padding: 120px 0; border-bottom: 1px solid var(--line); }
+.bg-subtle { background: var(--bg-subtle); }
+.bg-dark { background: var(--bg-dark); color: #fff; }
+.bg-light { background: #f9f9f9; }
+
+.sec-subtitle {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.85rem; 
+  font-weight: 700; color: var(--sakura); margin-bottom: 12px;
+}
+.sec-title {
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 24px; line-height: 1.25;
+}
+.sec-desc { font-size: 1.15rem; color: var(--text-sub); max-width: 650px; margin-bottom: 40px; }
+
+
+/* =========================================
+   HERO SECTION
+   ========================================= */
+.hero {
+  min-height: 100vh; padding-top: 140px; display: flex; align-items: center;
+  position: relative; overflow: hidden;
+}
+.hero-container {
+  display: grid; grid-template-columns: 1fr; gap: 50px; width: 100%;
+}
+@media (min-width: 992px) {
+  .hero-container { grid-template-columns: 1.1fr 0.9fr; align-items: center; }
+}
+
+.kicker {
+  display: inline-block; padding: 6px 14px; background: var(--bg-subtle);
+  color: var(--sakura); border-radius: 20px; font-weight: 700; font-size: 0.85rem; margin-bottom: 20px;
+}
+.hero-title {
+  font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 24px; letter-spacing: -0.02em;
+}
+.hero-title span { color: var(--sakura); display: inline-block; position: relative; }
+.hero-title span::after {
+  content:''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 15px;
+  background: rgba(255, 79, 147, 0.15); z-index: -1; transform: rotate(-1deg);
+}
+.hero-desc { font-size: 1.2rem; color: var(--text-sub); margin-bottom: 40px; line-height: 1.6; }
+
+.btn-group { display: flex; gap: 16px; align-items: center; }
+.btn-primary {
+  background: var(--sakura); color: white; padding: 16px 36px; border-radius: 12px;
+  font-weight: 700; font-size: 1.05rem; box-shadow: 0 10px 20px rgba(255, 79, 147, 0.25);
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255, 79, 147, 0.35); }
+.btn-text { color: var(--text-main); font-weight: 600; text-decoration: underline; padding: 10px; }
+
+/* 3D Visual */
+.hero-visual {
+  height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  perspective: 1000px;
+}
+.layer-stack {
+  position: relative; width: 280px; height: 320px;
+  transform-style: preserve-3d;
+  transform: rotateX(55deg) rotateZ(-35deg);
+  transition: transform 0.5s ease;
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: rotateX(55deg) rotateZ(-35deg) translateY(0); }
+  50% { transform: rotateX(55deg) rotateZ(-35deg) translateY(-20px); }
+}
+.layer {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: 0.4s; box-shadow: 10px 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05);
+}
+.layer-top { background: #fff; transform: translateZ(100px); border: 2px solid var(--text-main); z-index: 3; }
+.layer-mid { background: rgba(255, 255, 255, 0.9); transform: translateZ(50px); border: 1px dashed var(--sakura); color: var(--text-main); z-index: 2; }
+.layer-bottom { background: #f8f9fa; transform: translateZ(0); z-index: 1; color: #999; }
+.hero-visual:hover .layer-stack { transform: rotateX(55deg) rotateZ(-35deg) scale(0.95); }
+.hero-visual:hover .layer-top { transform: translateZ(160px); }
+.hero-visual:hover .layer-mid { transform: translateZ(80px); }
+.layer-tag { position: absolute; top: -10px; left: 20px; background: #000; color: #fff; font-size: 0.6rem; padding: 4px 8px; font-weight: 700; border-radius: 4px; }
+.layer-mid .layer-tag { background: var(--sakura); }
+.layer-content { text-align: center; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; }
+.visual-caption { margin-top: 40px; font-size: 0.8rem; color: #aaa; text-align: center; }
+
+
+/* =========================================
+   STORY & PROBLEM
+   ========================================= */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.quote-card {
+  background: white; padding: 48px; border-radius: var(--radius-lg);
+  border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+}
+.quote-text { font-size: 1.4rem; font-weight: 600; line-height: 1.5; color: var(--text-main); }
+.indi-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #E8F5E9; color: #2E7D32; padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.9rem;
+}
+
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+.card { padding: 40px 30px; border-radius: 20px; transition: 0.3s; }
+.card.bg-gray { background: var(--bg-gray); border: 1px solid transparent; }
+.card:hover { background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: var(--line); transform: translateY(-5px); }
+.emoji { font-size: 3rem; margin-bottom: 20px; }
+.card h3 { font-size: 1.3rem; margin-bottom: 10px; font-weight: 700; }
+.card p { color: var(--text-sub); font-size: 0.95rem; }
+
+
+/* =========================================
+   TECH SPECS (DARK)
+   ========================================= */
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
+.tech-item {
+  background: rgba(255,255,255,0.05); padding: 30px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);
+}
+.tech-num {
+  font-family: var(--font-mono); font-size: 2rem; color: var(--sakura); opacity: 0.5; font-weight: 800; margin-bottom: 10px;
+}
+.tech-item h3 { font-size: 1.3rem; margin-bottom: 10px; color: #fff; }
+.tech-item p { color: #aaa; font-size: 0.9rem; }
+
+
+/* =========================================
+   HANDOFF & REVIEW
+   ========================================= */
+/* =========================================
+   HANDOFF & REVIEW (IMPACT VER.)
+   ========================================= */
+
+/* 컨테이너 설정 */
+.network-visual-impact {
+  position: relative;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+/* 노드 공통 스타일 */
+.user-node {
+  width: 90px;
+  height: 120px;
+  text-align: center;
+  font-weight: 700;
+  z-index: 2;
+  background: white;
+  border-radius: 16px;
+  padding: 15px 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+/* 출발 노드 위치 */
+.source-node {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 타겟 노드들 위치 크기 */
+.target-nodes {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.target-node {
+  height: 100px; /* 높이 약간 조절 */
+}
+
+/* SVG �곌껐�� �ㅽ��� */
+.connect-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.path-line {
+  stroke: var(--sakura);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: drawPath 2.5s ease-in-out infinite;
+  opacity: 0.3;
+}
+@keyframes drawPath {
+  0% { stroke-dashoffset: 400; }
+  50% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -400; }
+}
+
+/* �⑦궥 怨듯넻 �ㅽ��� */
+.packet {
+  position: absolute;
+  padding: 8px 16px;
+  background: var(--sakura);
+  color: white;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  z-index: 3;
+  box-shadow: 0 0 20px var(--sakura-glow);
+  top: 50%;
+  left: 45px; /* 異쒕컻�� 以묒븰 */
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+/* �⑦궥 1: 踰뺣쪧�꾨Ц媛��� (�꾨줈) */
+.p1 {
+  animation: transfer-impact-1 2.5s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+}
+@keyframes transfer-impact-1 {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+  10% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } /* 異쒕컻 �� 媛뺤“ */
+  60% { transform: translate(calc(350px - 45px - 50%), calc(50px - 125px - 50%)) scale(1); opacity: 1; } /* 紐⑺몴 �꾨떖 */
+  80% { transform: translate(calc(350px - 45px - 50%), calc(50px - 125px - 50%)) scale(0.8); opacity: 0; } /* �꾩갑 �� �щ씪吏� */
+  100% { opacity: 0; }
+}
+
+/* �⑦궥 2: �멸났吏��ν뻾 (�꾨옒濡�) */
+.p2 {
+  animation: transfer-impact-2 2.5s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+}
+@keyframes transfer-impact-2 {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+  10% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  60% { transform: translate(calc(350px - 45px - 50%), calc(150px - 125px - 50%)) scale(1); opacity: 1; }
+  80% { transform: translate(calc(350px - 45px - 50%), calc(150px - 125px - 50%)) scale(0.8); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+
+.user-node {
+  width: 90px; height: 120px; text-align: center; font-weight: 700; z-index: 2;
+  background: white; border-radius: 12px; padding: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+.connect-line-horz {
+  width: 200px; height: 2px; background: #eee; position: absolute; z-index: 1;
+}
+.packet {
+  position: absolute; padding: 6px 12px; background: var(--sakura); color: white;
+  border-radius: 50px; font-weight: 700; font-size: 0.8rem; z-index: 3;
+  animation: transfer 3s infinite cubic-bezier(0.45, 0, 0.55, 1);
+}
+@keyframes transfer {
+  0% { transform: translateX(-100px) scale(0.9); opacity: 0; }
+  20% { opacity: 1; transform: translateX(-100px) scale(1); }
+  80% { opacity: 1; transform: translateX(100px) scale(1); }
+  100% { transform: translateX(100px) scale(0.9); opacity: 0; }
+}
+
+.review-box {
+  background: #fff; padding: 60px 40px; border-radius: 30px; text-align: center;
+  max-width: 900px; margin: 0 auto; border: 1px solid var(--line);
+}
+.quote-mark { font-size: 5rem; line-height: 0; color: var(--sakura); opacity: 0.2; font-family: serif; display: block; margin-bottom: 30px; }
+.review-box h3 { font-size: 1.5rem; line-height: 1.6; font-weight: 500; margin-bottom: 30px; }
+.reviewer strong { display: block; font-size: 1.1rem; margin-bottom: 4px; }
+
+
+/* =========================================
+   FAQ & DOWNLOAD
+   ========================================= */
+.small-container { max-width: 800px; margin: 0 auto; }
+.faq-item {
+  background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  padding: 24px; margin-bottom: 16px;
+}
+.faq-q { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; }
+.faq-a { color: var(--text-sub); font-size: 0.95rem; }
+
+
+.free-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 100px; height: 100px; border-radius: 50%;
+  background: var(--sakura); color: white; font-weight: 800; font-size: 1.4rem;
+  box-shadow: 0 0 0 rgba(255, 79, 147, 0.4); animation: pulse 2s infinite; margin-bottom: 30px;
+}
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 79, 147, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 30px rgba(255, 79, 147, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 79, 147, 0); }
+}
+.free-title { font-size: 3rem; font-weight: 800; margin-bottom: 24px; line-height: 1.2; }
+.free-desc { font-size: 1.2rem; max-width: 600px; margin: 0 auto; color: var(--text-sub); }
+
+.download-btns { display: flex; gap: 20px; flex-wrap: wrap; }
+.btn-large { padding: 18px 40px; font-size: 1.1rem; border-radius: 12px; }
+.btn-outline { border: 2px solid var(--text-main); background: transparent; color: var(--text-main); font-weight: 700; transition: 0.3s; }
+.btn-outline:hover { background: var(--text-main); color: #fff; }
+.cta-note { margin-top: 30px; font-size: 0.85rem; color: #aaa; }
+.os-icon { margin-right: 8px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.8rem; }
+  .grid-2, .feature-layout, .hero-container { grid-template-columns: 1fr; }
+  .free-title { font-size: 2.2rem; }
+  .console-mockup { height: auto; min-height: 480px; }
+}
+
+
+/* =========================================
+   NEW DARK CTA SECTION (�먰븯�� �붿옄�� �곸슜)
+   ========================================= */
+.cta-dark {
+  background-color: #0a0a0b; /* �꾩＜ 源딆� 寃����� */
+  color: #ffffff;
+  padding: 160px 0;
+  text-align: center;
+  position: relative;
+}
+
+.cta-dark .cta-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem); /* 諛섏쓳�� �� �고듃 */
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 24px;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.cta-dark .cta-desc {
+  font-size: 1.2rem;
+  color: #888888; /* ������ �뚯깋 �띿뒪�� */
+  margin-bottom: 60px;
+  font-weight: 400;
+}
+
+/* 踰꾪듉 �ㅽ��� (Dark Section �꾩슜) */
+.btn-large {
+  padding: 18px 42px;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 1. �곗깋 踰꾪듉 (macOS) */
+.btn-white {
+  background-color: #ffffff;
+  color: #111111;
+  border: 1px solid #ffffff;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+.btn-white:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+}
+
+/* 2. �щ챸 �뚮몢由� 踰꾪듉 (Windows) */
+.btn-outline-white {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.btn-outline-white:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  transform: translateY(-4px);
+}
+
+/* �섎떒 �덈궡 臾멸뎄 */
+.cta-note {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #555555;
+}
+
+/* 紐⑤컮�� ���� */
+@media (max-width: 768px) {
+  .cta-dark { padding: 100px 0; }
+  .download-btns { flex-direction: column; gap: 16px; }
+  .btn-large { width: 100%; justify-content: center; }
+}
+
+
+/* 2. Left Side: Visual Diagram Box */
+.split-visual {
+  height: 400px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* SVG �좎씠 諛뽰쑝濡� �섍��� 寃� 諛⑹� */
+}
+
+.logic-diagram {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* 3. Nodes Styling */
+.node {
+  position: absolute;
+  padding: 10px 24px;
+  background: #ffffff;
+  border: 2px solid var(--text-main);
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  z-index: 2;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transform: translate(-50%, -50%); /* �뺥솗�� 以묒떖 諛곗튂 */
+}
+
+/* Center Node (Black) */
+.n-center {
+  top: 50%; left: 50%;
+  background: var(--text-main);
+  color: #ffffff;
+  border-color: var(--text-main);
+  z-index: 3;
+}
+
+/* Surrounding Nodes Positions */
+.n1 { top: 25%; left: 20%; }
+.n2 { top: 75%; left: 20%; }
+.n3 { top: 50%; left: 80%; }
+
+/* 4. Connecting Lines (SVG) */
+.svg-connect {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.svg-connect line {
+  stroke: #e0e0e0;
+  stroke-width: 2;
+  stroke-dasharray: 6; /* �먯꽑 �④낵 */
+  animation: dash 30s linear infinite; /* 泥쒖쿇�� �먮Ⅴ�� �④낵 */
+}
+@keyframes dash {
+  to { stroke-dashoffset: -1000; }
+}
+
+/* 5. Right Side: Feature List */
+.feature-list {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.f-item {
+  padding-left: 24px;
+  border-left: 3px solid var(--sakura); /* �묓겕�� 媛뺤“ �쇱씤 */
+}
+
+.f-item strong {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.f-item p {
+  font-size: 1rem;
+  color: var(--text-sub);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .split-layout { grid-template-columns: 1fr; }
+  .split-visual { height: 320px; }
+  .node { padding: 8px 16px; font-size: 0.85rem; }
+  .n1 { left: 25%; } .n2 { left: 25%; } .n3 { left: 75%; }
+}
+
+/* =========================================
+   NEW SOLUTION SECTION (DIAGRAM STYLE)
+   ========================================= */
+
+/* 1. 醫뚯슦 遺꾪븷 洹몃━�� */
+.split-layout {
+  display: grid;
+  gap: 60px;
+  align-items: center;
+}
+@media (min-width: 992px) {
+  .split-layout {
+    grid-template-columns: 1fr 1fr; /* PC �붾㈃�먯꽌 1:1 遺꾪븷 */
+  }
+}
+
+/* 2. �쇱そ 諛뺤뒪 (�ㅼ씠�닿렇�� 諛곌꼍) */
+.split-visual {
+  height: 420px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.logic-diagram {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* 3. �몃뱶 �붿옄�� (�κ렐 �뚯빟 紐⑥뼇) */
+.node {
+  position: absolute;
+  padding: 12px 24px;
+  background: #ffffff;
+  border: 2px solid var(--text-main);
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  z-index: 2;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transform: translate(-50%, -50%); /* �뺥솗�� 以묒븰 �뺣젹 */
+  white-space: nowrap;
+}
+
+/* 以묒븰 寃����� �몃뱶 */
+.n-center {
+  top: 50%; left: 50%;
+  background: var(--text-main);
+  color: #ffffff;
+  border-color: var(--text-main);
+  z-index: 10;
+}
+
+/* 二쇰� �몃뱶 �꾩튂 */
+.n1 { top: 30%; left: 20%; } /* �숈깮 A �곷떞 */
+.n2 { top: 70%; left: 20%; } /* �숇�紐� �꾪솕 */
+.n3 { top: 50%; left: 80%; } /* 蹂닿굔�� 湲곕줉 */
+
+/* 4. �곌껐�� (SVG �먯꽑) */
+.svg-connect {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.svg-connect line {
+  stroke: #d1d5db;
+  stroke-width: 2;
+  stroke-dasharray: 6;
+  animation: dash 40s linear infinite;
+}
+@keyframes dash {
+  to { stroke-dashoffset: -1000; }
+}
+
+/* 5. �ㅻⅨ履� �띿뒪�� 由ъ뒪�� (鍮④컙 以�) */
+.feature-list {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.f-item {
+  padding-left: 24px;
+  border-left: 3px solid var(--sakura); /* �묓겕�� �몃줈�� */
+}
+
+.f-item strong {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.f-item p {
+  font-size: 1rem;
+  color: var(--text-sub);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 紐⑤컮�� ���� */
+@media (max-width: 768px) {
+  .split-layout { grid-template-columns: 1fr; }
+  .split-visual { height: 300px; }
+  .node { padding: 8px 16px; font-size: 0.8rem; }
+  .n1 { left: 25%; } .n2 { left: 25%; } .n3 { left: 75%; }
+}
+
+/* =========================================
+   PROCESS FLOW SECTION (3-STEP)
+   ========================================= */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+.step-card {
+  background: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.step-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+}
+
+.step-header {
+  padding: 32px;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.step-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--sakura);
+  background: var(--sakura-dim);
+  padding: 6px 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.step-header h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.step-header p {
+  font-size: 0.95rem;
+  color: var(--text-sub);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.step-img-box {
+  background: #f8f9fa;
+  padding: 20px;
+  flex-grow: 1; /* 移대뱶 �믪씠 留욎텛湲� */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.step-card:hover .step-img {
+  transform: scale(1.02);
+}
+
+/* 紐⑤컮�� ���� */
+@media (max-width: 768px) {
+  .process-steps { grid-template-columns: 1fr; gap: 30px; }
+  .step-img-box { padding: 15px; }
+}
+
+/* style.css�� 異붽� */
+
+/* .text-center �덉뿉 �덈뒗 .sec-desc�� 諛뺤뒪 �먯껜�� 媛��대뜲 �뺣젹 */
+.text-center .sec-desc {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================================
+   TECH PROOF SECTION (REAL IMAGE VER - FIXED)
+   ========================================= */
+.tech-proof-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 50px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+/* 이미지 영역 컨테이너 */
+.papers-visual-real {
+  position: relative;
+  height: 540px; /* 높이를 늘려서 논문이 더 시원하게 보이도록 수정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+/* 개별 논문 카드 프레임 */
+.real-paper {
+  position: absolute;
+  width: 380px; /* 너비 확대 (가독성 향상) */
+  height: auto;
+  border-radius: 2px; /* 종이 질감을 위해 라운드 축소 */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  background: #fff;
+  transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+
+.paper-img {
+  width: 100%;
+  display: block;
+  /* 아래쪽만 부드럽게 사라지게 처리 (제목 강조) */
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+/* 뒤쪽 논문 (DATASET MKSL) */
+.p-back {
+  transform: rotate(-6deg) translate(-40px, -20px) scale(0.95);
+  z-index: 1;
+  opacity: 0.8;
+  filter: grayscale(100%) contrast(0.9); /* 뒤쪽은 흑백으로 눌러줌 */
+}
+
+/* 앞쪽 논문 (AI GEN - 메인) */
+.p-front {
+  transform: rotate(3deg) translate(20px, 10px);
+  z-index: 2;
+  border-top: 4px solid var(--sakura);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2); /* 그림자 강화 */
+}
+
+/* 마우스 올렸을 때 인터랙션 (종이가 앞으로 튀어나옴) */
+.papers-visual-real:hover .p-front {
+  transform: rotate(0deg) translate(40px, 0px) scale(1.05);
+  z-index: 10;
+}
+.papers-visual-real:hover .p-back {
+  transform: rotate(-10deg) translate(-60px, 10px) scale(0.95);
+}
+
+/* =========================================
+   저자 가리기 (Redaction Blur) - 위치 정밀 조정
+   ========================================= */
+.blur-cover {
+  position: absolute;
+  left: 8%; 
+  width: 84%; /* 좌우 너비 맞춤 */
+  background: rgba(255, 255, 255, 0.1); /* 투명도 높임 */
+  backdrop-filter: blur(5px); /* 글자가 뭉개져 보이도록 */
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  
+  /* 보안 문서 패턴 */
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.03),
+    rgba(0, 0, 0, 0.03) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* 스탬프 효과 (이미지 버전) */
+.p-stamp-real {
+  position: absolute;
+  bottom: 25%; /* 위치 상향 조정 */
+  right: 20px;
+  width: 90px;
+  height: 90px;
+  border: 4px solid var(--sakura); /* 테두리 강화 */
+  border-radius: 50%;
+  background: rgba(255,255,255,0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--sakura);
+  font-weight: 900;
+  transform: rotate(-15deg);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  backdrop-filter: blur(4px);
+  mix-blend-mode: multiply; /* 종이에 도장 찍힌 듯한 효과 */
+}
+.p-stamp-real span { font-size: 0.9rem; line-height: 1; letter-spacing: -0.05em; }
+.p-stamp-real small { font-size: 0.7rem; margin-top: 4px; font-family: var(--font-serif); }
+
+/* =========================================
+   NEW PHILOSOPHY SECTION (담백한 버전)
+   ========================================= */
+.philosophy-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 0;
+  text-align: center;
+  border-top: 1px solid #eee; /* 아주 연한 구분선 */
+  border-bottom: 1px solid #eee;
+}
+
+.ph-text {
+  font-size: 1.35rem;
+  line-height: 1.8;
+  color: #333;
+  word-break: keep-all;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.ph-text strong {
+  font-weight: 700;
+  color: #191f28; /* 진한 검정 */
+  box-shadow: inset 0 -10px 0 rgba(255, 79, 147, 0.1); /* 벚꽃색 형광펜 효과 아주 연하게 */
+}
+
+.ph-author {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #888;
+  font-family: var(--font-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.ph-author::before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: #ddd;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  .ph-text { font-size: 1.1rem; line-height: 1.7; }
+  .philosophy-wrapper { padding: 40px 20px; border: none; background: #fdfdfd; border-radius: 12px; }
+}
+
+/* =========================================
+   [모바일 수정] 논문 이미지 겹침 해결 & 최적화
+   ========================================= */
+@media (max-width: 768px) {
+  /* 1. 좌우 배치를 위아래(1열)로 변경하여 공간 확보 */
+  .tech-proof-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important; /* 이미지와 글자 사이 간격 */
+  }
+
+  /* 2. 이미지 들어가는 박스 높이를 모바일에 맞게 조절 */
+  .papers-visual-real {
+    height: 380px !important; /* 540px은 너무 커서 줄임 */
+    margin-bottom: 20px;
+  }
+
+  /* 3. 논문 이미지 크기를 화면 폭에 맞춰 줄임 (가장 중요!) */
+  .real-paper {
+    width: 80% !important;       /* 화면의 80%만 차지 */
+    max-width: 320px !important; /* 최대 크기 제한 */
+    left: 50% !important;
+    top: 50% !important;
+    /* absolute 상태 유지하되 중앙 정렬 */
+  }
+
+  /* 4. 겹쳐진 논문들의 위치를 중앙으로 예쁘게 재조정 */
+  .p-back {
+    transform: translate(-55%, -55%) rotate(-6deg) scale(0.9) !important;
+  }
+  .p-front {
+    transform: translate(-45%, -45%) rotate(3deg) !important;
+  }
+}
