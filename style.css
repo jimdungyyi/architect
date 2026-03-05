@@ -6,13 +6,15 @@
 }
 
 body {
-    background-color: #0a0a0c; /* 아주 깊은 무연탄색 (팔란티어 스타일) */
+    background-color: #0a0a0c; 
     color: #ffffff;
     font-family: 'Pretendard', sans-serif;
     overflow-x: hidden;
 }
 
-/* 히어로 섹션 전체 레이아웃 */
+/* -----------------------------------
+   섹션 1: 히어로 영역
+----------------------------------- */
 .hero-section {
     position: relative;
     height: 100vh;
@@ -24,7 +26,94 @@ body {
     overflow: hidden;
 }
 
-/* 1. 배경 효과: 아키텍트(설계자) 느낌의 은은한 그리드 */
+/* 상단 네비게이션 바 (GNB) */
+.gnb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100; 
+    
+    opacity: 0;
+    animation: fadeDown 1s ease forwards;
+    animation-delay: 0.5s;
+}
+
+.gnb-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+}
+
+.gnb-menu {
+    display: flex;
+    align-items: center;
+    gap: 24px; 
+}
+
+.gnb-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.gnb-link:hover {
+    color: #ffffff; 
+}
+
+.gnb-button {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #0a0a0c;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.gnb-button:hover {
+    background-color: #e0e0e0;
+}
+
+@keyframes fadeDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 영상 및 다크 오버레이 */
+.hero-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 1; 
+    filter: brightness(1.1) saturate(1.2);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(10, 10, 12, 0.4) 0%, rgba(10, 10, 12, 0.85) 100%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1;
+}
+
 .hero-bg-grid {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -32,10 +121,9 @@ body {
         linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
-    z-index: 1;
+    z-index: 2; 
 }
 
-/* 2. 배경 효과: 중앙 하단에서 올라오는 신비로운 빛 (Glow) */
 .hero-glow {
     position: absolute;
     bottom: -20%;
@@ -44,44 +132,60 @@ body {
     width: 80vw;
     height: 50vh;
     background: radial-gradient(ellipse at center, rgba(40, 50, 80, 0.4) 0%, rgba(10, 10, 12, 0) 70%);
-    z-index: 2;
+    z-index: 3;
 }
 
-/* 콘텐츠 래퍼 */
+/* 텍스트 및 버튼 콘텐츠 영역 */
 .hero-content {
     position: relative;
     z-index: 10;
     padding: 0 20px;
 }
 
-/* 텍스트 타이포그래피 */
-.main-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 24px;
-    color: #ffffff;
+.kicker {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
     
-    /* 애니메이션 초기 상태 세팅 */
     opacity: 0;
     animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.3s; /* 0.3초 뒤에 등장 */
+    animation-delay: 0.2s; 
+}
+
+.giant-title {
+    font-size: 12vw; 
+    font-weight: 900;
+    line-height: 1; 
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    
+    background: linear-gradient(135deg, #ffffff 0%, #b0c4de 100%);
+    background-clip: text; 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px rgba(60, 130, 255, 0.8)); 
+
+    opacity: 0;
+    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.4s; 
 }
 
 .sub-title {
     font-size: 1.2rem;
     font-weight: 400;
     line-height: 1.6;
-    color: #a0a0a5; /* 세련된 다크 그레이 텍스트 */
+    color: #a0a0a5; 
     margin-bottom: 40px;
-
     opacity: 0;
     animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.7s; /* 메인 타이틀보다 살짝 늦게 등장 */
+    animation-delay: 0.7s; 
 }
 
-/* CTA 버튼 디자인 */
+/* 💡 3번 디테일: 상호작용이 강화된 CTA 버튼 (빛 지나감 + 입체감) */
 .cta-button {
+    position: relative; /* 💡 가상의 빛(::before)이 버튼 안에서만 움직이게 하는 기준점 역할 */
     padding: 16px 32px;
     font-size: 1rem;
     font-weight: 600;
@@ -90,29 +194,50 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    overflow: hidden; /* 💡 버튼 테두리 밖으로 튀어나가는 빛을 안 보이게 싹둑 잘라줌 */
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     
     opacity: 0;
     animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 1.1s; /* 가장 마지막에 등장 */
+    animation-delay: 0.9s; 
 }
 
+/* 💡 버튼 내부를 스윽 지나갈 '가상의 빛 줄기' 만들기 */
+.cta-button::before {
+    content: ''; /* HTML에 없지만 CSS로 만들어내는 가상 요소 */
+    position: absolute; 
+    top: 0; 
+    left: -100%; /* 처음에는 버튼 왼쪽 창밖에 숨어있음 */
+    width: 50%; 
+    height: 100%;
+    /* 투명 -> 하얀 반투명 -> 투명으로 이어지는 빛 그라데이션 */
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease; /* 이동하는 속도 세팅 */
+}
+
+/* 💡 마우스를 올렸을 때 버튼 자체의 변화 */
 .cta-button:hover {
-    background: #ffffff;
-    color: #0a0a0c;
-    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.1); /* 배경이 살짝 밝아짐 */
+    border-color: rgba(255, 255, 255, 0.8); /* 테두리가 더 선명해짐 */
+    transform: translateY(-3px); /* 마우스 닿으면 자석처럼 위로 살짝 떠오름 */
+    box-shadow: 0 10px 20px rgba(60, 130, 255, 0.2); /* 아래쪽에 은은한 푸른빛 그림자 추가 */
 }
 
-/* 스크롤 유도 (마우스 아이콘) */
+/* 💡 마우스를 올렸을 때 빛 줄기가 왼쪽에서 오른쪽으로 이동 */
+.cta-button:hover::before {
+    left: 150%; /* 왼쪽 창밖에 있던 빛이 오른쪽 창밖까지 쭈욱 이동 */
+    transition: left 0.7s ease; /* 0.7초 동안 스르륵 지나감 */
+}
+
 .scroll-indicator {
     position: absolute;
     bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    width: 100%; 
     z-index: 10;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
     gap: 8px;
     
     opacity: 0;
@@ -137,7 +262,7 @@ body {
     top: 6px;
     left: 50%;
     transform: translateX(-50%);
-    animation: scrollWheel 2s infinite; /* 휠이 굴러가는 애니메이션 무한 반복 */
+    animation: scrollWheel 2s infinite; 
 }
 
 .scroll-text {
@@ -147,88 +272,221 @@ body {
     text-transform: uppercase;
 }
 
-/* --- 애니메이션 키프레임 (Keyframes) --- */
-
-/* 텍스트가 아래에서 위로 스르륵 떠오르는 효과 */
 @keyframes fadeUp {
-    0% {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
-/* 마우스 휠이 아래로 내려가며 사라지는 효과 */
 @keyframes scrollWheel {
-    0% {
-        transform: translate(-50%, 0);
-        opacity: 1;
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 12px); opacity: 0; }
+}
+
+/* 💡 하이테크 HUD 장식 */
+.hud-elements {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; 
+    z-index: 20; 
+    
+    opacity: 0;
+    animation: fadeUp 2s ease forwards;
+    animation-delay: 1.2s; 
+}
+
+.hud-line {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-color: rgba(255, 255, 255, 0.2);
+    border-style: solid;
+}
+.top-left { top: 30px; left: 30px; border-width: 2px 0 0 2px; }
+.top-right { top: 30px; right: 30px; border-width: 2px 2px 0 0; }
+.bottom-left { bottom: 30px; left: 30px; border-width: 0 0 2px 2px; }
+.bottom-right { bottom: 30px; right: 30px; border-width: 0 2px 2px 0; }
+
+.hud-text {
+    position: absolute;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.1em;
+}
+
+.text-tl { top: 80px; left: 40px; }
+.text-tr { top: 80px; right: 40px; }
+.text-bl { bottom: 40px; left: 40px; }
+.text-br { bottom: 40px; right: 40px; } 
+
+.blink {
+    color: #4CAF50; 
+    animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0.2; }
+}
+
+/* -----------------------------------
+   섹션 2: 페인 포인트 (스크롤 효과 영역)
+----------------------------------- */
+.pain-points-section {
+    background-color: #0c0d12; 
+    padding: 150px 20px; 
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 80px;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+}
+
+.cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 32px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.02); 
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+    border-radius: 16px; 
+    padding: 40px 32px;
+    transition: transform 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+}
+
+.card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-8px); 
+    border-color: rgba(255, 255, 255, 0.15); 
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.card-desc {
+    font-size: 1rem;
+    color: #a0a0a5; 
+    line-height: 1.6;
+}
+
+.reveal-item {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(10px); 
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out, filter 0.4s ease-out;
+}
+
+.reveal-item.active {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0); 
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card.reveal-item:nth-child(1).active { transition-delay: 0.1s; }
+.card.reveal-item:nth-child(2).active { transition-delay: 0.3s; }
+.card.reveal-item:nth-child(3).active { transition-delay: 0.5s; }
+
+
+/* =========================================
+   📱 모바일 반응형
+========================================= */
+@media (max-width: 768px) {
+    
+    /* GNB 모바일 최적화 */
+    .gnb { padding: 20px 24px; }
+    .gnb-logo { font-size: 1.2rem; }
+    .gnb-link { display: none; }
+    .gnb-button { padding: 8px 16px; font-size: 0.85rem; }
+
+    /* 히어로 섹션 정렬 변경 */
+    .hero-section { align-items: flex-start; }
+    .hero-content {
+        text-align: left;
+        width: 100%; height: 100vh;
+        display: flex; flex-direction: column; justify-content: center; 
+        padding: 0 90px 0 24px; 
     }
-    100% {
-        transform: translate(-50%, 12px);
-        opacity: 0;
+
+    /* 왼쪽 시스템 데이터 라인 장식 */
+    .kicker {
+        font-size: 1rem; margin-bottom: 24px; word-break: keep-all; 
+        border-left: 2px solid rgba(255, 255, 255, 0.4); padding-left: 16px;
     }
-}
-
-/* --- 추가된 비디오 및 오버레이 CSS --- */
-
-/* 동영상을 꽉 차게 배경으로 설정 */
-/* --- 비디오 및 오버레이 CSS (초기 버전에서 밝고 선명하게 개선) --- */
-
-/* 1. 동영상을 꽉 차게 배경으로 설정 */
-.hero-bg-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: 0;
     
-    /* 💡 수정됨: 투명도를 없애고 100%로 만들어서 영상 본연의 색이 다 나오게 함 */
-    opacity: 1; 
+    .sub-title {
+        font-size: 0.9rem; margin-bottom: 40px; word-break: keep-all;
+        border-left: 2px solid rgba(255, 255, 255, 0.4); padding-left: 16px;
+    }
+
+    .cta-button {
+        align-self: flex-start; margin-left: 18px; 
+        padding: 12px 24px; font-size: 0.9rem;
+    }
+
+    /* 주인공 ARCHITECT (고담 스타일 회전) */
+    .giant-title {
+        position: absolute; right: 15px; top: 0; bottom: 0; margin: auto; 
+        height: max-content; writing-mode: vertical-rl; 
+        animation: fadeUpRotate 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.4s; 
+        font-size: 12vh; letter-spacing: 0.02em; line-height: 1; color: rgba(255, 255, 255, 0.9); 
+        background: none; -webkit-text-fill-color: rgba(255, 255, 255, 0.9); filter: none;
+    }
+
+    @keyframes fadeUpRotate {
+        0% { opacity: 0; transform: rotate(180deg) translateY(-40px); }
+        100% { opacity: 1; transform: rotate(180deg) translateY(0); }
+    }
+
+    /* 💡 HUD 모바일 최적화 */
+    .hud-line { width: 20px; height: 20px; }
+    .top-left { top: 16px; left: 16px; }
+    .top-right { top: 16px; right: 16px; }
+    .bottom-left { bottom: 16px; left: 16px; }
+    .bottom-right { bottom: 16px; right: 16px; }
     
-    /* 💡 비디오 디테일 강화: 화면이 더 쨍하고 밝아 보이도록 
-       밝기(brightness)와 채도(saturate)를 살짝 올려줍니다. */
-    filter: brightness(1.1) saturate(1.2);
-}
+    .hud-text { font-size: 0.65rem; }
+    .text-tl { top: 50px; left: 24px; }
+    .text-tr { display: none; } 
+    .text-bl { bottom: 20px; left: 24px; }
+    .text-br { bottom: 20px; right: 24px; }
 
-/* 2. 동영상 위를 덮는 다크 오버레이 (글자 가독성 확보용) */
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    /* 페인 포인트 모바일 최적화 */
+    .pain-points-section { padding: 80px 20px; }
+    .section-title { font-size: 1.8rem; margin-bottom: 48px; word-break: keep-all; }
+    .cards-wrapper { grid-template-columns: 1fr; gap: 20px; }
+    .card { padding: 30px 24px; }
+    .card-icon { font-size: 2rem; margin-bottom: 16px; }
+    .card-title { font-size: 1.15rem; }
+    .card-desc { font-size: 0.95rem; }
     
-    /* 💡 수정됨: 이전(0.7~0.95)보다 훨씬 투명하게 만들어서 영상이 확 뚫고 나오게 함.
-       위쪽은 20% 정도만 살짝 덮고, 글자가 있는 아래쪽으로 갈수록 80%로 어두워집니다. */
-    background: linear-gradient(to bottom, rgba(10, 10, 12, 0.2) 0%, rgba(10, 10, 12, 0.8) 100%);
-    z-index: 1;
-}
-
-/* 3. 기존 그리드 (원래 코드 그대로 유지) */
-.hero-bg-grid {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    /* 💡 원래 네가 짰던 0.03 투명도의 예쁜 바둑판 격자 그대로입니다. */
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    z-index: 2; /* 오버레이 위 */
-}
-
-/* 기존 z-index 순서 유지 */
-.hero-glow {
-    z-index: 3;
-}
-.hero-content {
-    z-index: 10;
-}
-.scroll-indicator {
-    z-index: 10;
+    /* 모바일 영상 포커스 및 오버레이 */
+    .hero-bg-video { object-position: 85% center; }
+    .hero-overlay {
+        background: linear-gradient(to right, rgba(10, 10, 12, 0.95) 0%, rgba(10, 10, 12, 0.7) 50%, rgba(10, 10, 12, 0.1) 100%);
+    }
 }
