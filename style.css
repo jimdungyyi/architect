@@ -26,7 +26,6 @@ body {
     overflow: hidden;
 }
 
-/* 상단 네비게이션 바 (GNB) */
 .gnb {
     position: absolute;
     top: 0;
@@ -65,9 +64,7 @@ body {
     transition: color 0.3s ease;
 }
 
-.gnb-link:hover {
-    color: #ffffff; 
-}
+.gnb-link:hover { color: #ffffff; }
 
 .gnb-button {
     padding: 10px 20px;
@@ -80,41 +77,25 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.gnb-button:hover {
-    background-color: #e0e0e0;
-}
+.gnb-button:hover { background-color: #e0e0e0; }
 
 @keyframes fadeDown {
     0% { opacity: 0; transform: translateY(-20px); }
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* 영상 및 다크 오버레이 */
 .hero-bg-video {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
+    top: 0; left: 0; width: 100%; height: 100vh;
     object-fit: cover;
     z-index: 0;
-    opacity: 1; 
     filter: brightness(1.1) saturate(1.2);
 }
 
 .hero-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    /* 농도를 style2처럼 연하게 조절 (0.4 -> 0.2 / 0.85 -> 0.8) */
+    top: 0; left: 0; width: 100%; height: 100vh;
     background: linear-gradient(to bottom, rgba(10, 10, 12, 0.2) 0%, rgba(10, 10, 12, 0.8) 100%);
-    
-    /* ❌ 아래의 블러 효과를 삭제하거나 주석 처리하세요 */
-    /* backdrop-filter: blur(6px); */
-    /* -webkit-backdrop-filter: blur(6px); */
-    
     z-index: 1;
 }
 
@@ -139,7 +120,6 @@ body {
     z-index: 3;
 }
 
-/* 텍스트 및 버튼 콘텐츠 영역 */
 .hero-content {
     position: relative;
     z-index: 10;
@@ -147,318 +127,171 @@ body {
 }
 
 .kicker {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: -0.01em;
-    margin-bottom: 16px;
-    
-    opacity: 0;
-    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.2s; 
+    font-size: 1.4rem; font-weight: 600; color: rgba(255, 255, 255, 0.9);
+    letter-spacing: -0.01em; margin-bottom: 16px;
+    opacity: 0; animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .giant-title {
-    font-size: 12vw; 
-    font-weight: 900;
-    line-height: 1; 
-    letter-spacing: -0.02em;
-    margin-bottom: 24px;
-    
+    font-size: 12vw; font-weight: 900; line-height: 1; letter-spacing: -0.02em; margin-bottom: 24px;
     background: linear-gradient(135deg, #ffffff 0%, #b0c4de 100%);
-    background-clip: text; 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 0 30px rgba(60, 130, 255, 0.8)); 
-
-    opacity: 0;
-    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.4s; 
+    opacity: 0; animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .sub-title {
-    font-size: 1.2rem;
-    font-weight: 400;
-    line-height: 1.6;
-    color: #a0a0a5; 
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.7s; 
+    font-size: 1.2rem; font-weight: 400; line-height: 1.6; color: #a0a0a5; margin-bottom: 40px;
+    opacity: 0; animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* 💡 3번 디테일: 상호작용이 강화된 CTA 버튼 (빛 지나감 + 입체감) */
 .cta-button {
-    position: relative; /* 💡 가상의 빛(::before)이 버튼 안에서만 움직이게 하는 기준점 역할 */
-    padding: 16px 32px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #ffffff;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-    cursor: pointer;
-    overflow: hidden; /* 💡 버튼 테두리 밖으로 튀어나가는 빛을 안 보이게 싹둑 잘라줌 */
+    position: relative;
+    padding: 16px 32px; font-size: 1rem; font-weight: 600; color: #ffffff;
+    background: transparent; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 4px;
+    cursor: pointer; overflow: hidden;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    
-    opacity: 0;
-    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.9s; 
+    opacity: 0; animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* 💡 버튼 내부를 스윽 지나갈 '가상의 빛 줄기' 만들기 */
 .cta-button::before {
-    content: ''; /* HTML에 없지만 CSS로 만들어내는 가상 요소 */
-    position: absolute; 
-    top: 0; 
-    left: -100%; /* 처음에는 버튼 왼쪽 창밖에 숨어있음 */
-    width: 50%; 
-    height: 100%;
-    /* 투명 -> 하얀 반투명 -> 투명으로 이어지는 빛 그라데이션 */
+    content: ''; position: absolute; top: 0; left: -100%;
+    width: 50%; height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s ease; /* 이동하는 속도 세팅 */
+    transition: left 0.5s ease;
 }
 
-/* 💡 마우스를 올렸을 때 버튼 자체의 변화 */
 .cta-button:hover {
-    background: rgba(255, 255, 255, 0.1); /* 배경이 살짝 밝아짐 */
-    border-color: rgba(255, 255, 255, 0.8); /* 테두리가 더 선명해짐 */
-    transform: translateY(-3px); /* 마우스 닿으면 자석처럼 위로 살짝 떠오름 */
-    box-shadow: 0 10px 20px rgba(60, 130, 255, 0.2); /* 아래쪽에 은은한 푸른빛 그림자 추가 */
+    background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-3px); box-shadow: 0 10px 20px rgba(60, 130, 255, 0.2);
 }
 
-/* 💡 마우스를 올렸을 때 빛 줄기가 왼쪽에서 오른쪽으로 이동 */
-.cta-button:hover::before {
-    left: 150%; /* 왼쪽 창밖에 있던 빛이 오른쪽 창밖까지 쭈욱 이동 */
-    transition: left 0.7s ease; /* 0.7초 동안 스르륵 지나감 */
-}
+.cta-button:hover::before { left: 150%; transition: left 0.7s ease; }
 
 .scroll-indicator {
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    width: 100%; 
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    gap: 8px;
-    
-    opacity: 0;
-    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 1.5s;
+    position: absolute; bottom: 40px; left: 0; width: 100%; z-index: 10;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.mouse {
-    width: 24px;
-    height: 36px;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 12px;
-    position: relative;
-}
+.mouse { width: 24px; height: 36px; border: 2px solid rgba(255, 255, 255, 0.4); border-radius: 12px; position: relative; }
+.wheel { width: 2px; height: 6px; background-color: #ffffff; border-radius: 2px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); animation: scrollWheel 2s infinite; }
+.scroll-text { font-size: 0.75rem; color: rgba(255, 255, 255, 0.4); letter-spacing: 0.1em; text-transform: uppercase; }
 
-.wheel {
-    width: 2px;
-    height: 6px;
-    background-color: #ffffff;
-    border-radius: 2px;
-    position: absolute;
-    top: 6px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: scrollWheel 2s infinite; 
-}
+@keyframes fadeUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes scrollWheel { 0% { transform: translate(-50%, 0); opacity: 1; } 100% { transform: translate(-50%, 12px); opacity: 0; } }
 
-.scroll-text {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-@keyframes fadeUp {
-    0% { opacity: 0; transform: translateY(40px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes scrollWheel {
-    0% { transform: translate(-50%, 0); opacity: 1; }
-    100% { transform: translate(-50%, 12px); opacity: 0; }
-}
-
-/* 💡 하이테크 HUD 장식 */
 .hud-elements {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; 
-    z-index: 20; 
-    
-    opacity: 0;
-    animation: fadeUp 2s ease forwards;
-    animation-delay: 1.2s; 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 20;
+    opacity: 0; animation: fadeUp 2s ease forwards;
 }
 
-.hud-line {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    border-color: rgba(255, 255, 255, 0.2);
-    border-style: solid;
-}
+.hud-line { position: absolute; width: 30px; height: 30px; border-color: rgba(255, 255, 255, 0.2); border-style: solid; }
 .top-left { top: 30px; left: 30px; border-width: 2px 0 0 2px; }
 .top-right { top: 30px; right: 30px; border-width: 2px 2px 0 0; }
 .bottom-left { bottom: 30px; left: 30px; border-width: 0 0 2px 2px; }
 .bottom-right { bottom: 30px; right: 30px; border-width: 0 2px 2px 0; }
 
-.hud-text {
-    position: absolute;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: 0.1em;
-}
+.hud-text { position: absolute; font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; color: rgba(255, 255, 255, 0.4); letter-spacing: 0.1em; }
+.text-tl { top: 80px; left: 40px; } .text-tr { top: 80px; right: 40px; } .text-bl { bottom: 40px; left: 40px; } .text-br { bottom: 40px; right: 40px; } 
 
-.text-tl { top: 80px; left: 40px; }
-.text-tr { top: 80px; right: 40px; }
-.text-bl { bottom: 40px; left: 40px; }
-.text-br { bottom: 40px; right: 40px; } 
-
-.blink {
-    color: #4CAF50; 
-    animation: blinker 2s linear infinite;
-}
-
-@keyframes blinker {
-    50% { opacity: 0.2; }
-}
+.blink { color: #4CAF50; animation: blinker 2s linear infinite; }
+@keyframes blinker { 50% { opacity: 0.2; } }
 
 /* =========================================
    💡 고담 스타일 브릿지 섹션 (거대 텍스트 연출)
 ========================================= */
 .gotham-statement-section {
     background-color: #050507; 
-    min-height: 100vh; 
+    min-height: 40vh; /* 🚨 60vh -> 40vh로 확 줄여서 빈 공간 완전 제거 */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 0 20px;
+    justify-content: flex-start; 
+    padding: 10vh 20px 0; /* 🚨 윗부분 여백도 살짝 줄임 */
+    position: relative;
     z-index: 30; 
 }
 
-/* 💡 두 글씨를 하나로 묶어주는 래퍼 (가운데 정렬) */
-.statement-wrapper {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+.statement-wrapper { width: 100%; max-width: 1200px; display: flex; flex-direction: column; align-items: center; }
 
-/* 고담 스타일 상단 얇은 텍스트 바 */
 .statement-header {
-    /* 🚨 1. position: absolute와 top: 60px을 완전히 지웠습니다! (천장 고정 해제) */
-    width: 100%;
-    display: flex;
-    justify-content: space-between; 
-    padding: 0 20px;
-    
-    /* 🚨 2. 거대 글씨와의 상하 간격 조절! (원하는 만큼 숫자를 줄이거나 늘려보세요) */
+    width: 100%; display: flex; justify-content: space-between; padding: 0 20px;
     margin-bottom: 50px; 
-    
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.3); 
-    letter-spacing: 0.15em;
+    font-size: 0.85rem; font-weight: 500; color: rgba(255, 255, 255, 0.3); letter-spacing: 0.15em;
 }
 
-/* 정중앙 거대 텍스트 스타일 */
-.statement-text {
-    font-size: 5.5rem; 
-    font-weight: 700;
-    color: #ffffff;
-    text-align: center;
-    line-height: 1.1;
-    letter-spacing: -0.04em; 
+.statement-text { font-size: 5.5rem; font-weight: 700; color: #ffffff; text-align: center; line-height: 1.1; letter-spacing: -0.04em; }
+
+/* =========================================
+   💡 영상 쇼케이스 섹션 (스크롤 연동 방식)
+========================================= */
+.video-showcase-section {
+    background-color: #050507;
+    margin-top: -10vh; /* 🚨 -5vh -> -10vh로 더 위로 끌어올림! (글씨랑 바짝 붙음) */
+    height: 150vh; 
+    position: relative;
+    z-index: 20;
 }
+
+.showcase-sticky-wrapper {
+    position: sticky; top: 0; height: 100vh;
+    display: flex; justify-content: center; align-items: center; overflow: hidden;
+}
+
+.showcase-container {
+    position: relative;
+    /* 🚨 고담처럼 처음엔 가로로 긴 '슬릿(Slit)' 형태에서 출발하도록 비율 변경 */
+    width: 70vw; 
+    height: 35vh; 
+    border-radius: 40px; 
+    overflow: hidden; filter: brightness(0.4);
+    will-change: width, height, border-radius, filter; 
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.9);
+    transition: none !important; 
+}
+
+.showcase-video { width: 100%; height: 100%; object-fit: cover; }
+
+.showcase-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(5, 5, 7, 0.95) 0%, rgba(5, 5, 7, 0.1) 40%, transparent 100%);
+}
+
+.showcase-text {
+    position: absolute; bottom: 50px; left: 60px; z-index: 10;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.showcase-container.is-full .showcase-text { opacity: 1; transform: translateY(0); }
+.showcase-text h3 { font-size: 2.5rem; font-weight: 700; color: #ffffff; margin-bottom: 12px; }
+.showcase-text p { font-size: 1.15rem; color: #a0a0a5; letter-spacing: -0.01em; }
+
 
 /* -----------------------------------
    섹션 2: 페인 포인트 (스크롤 효과 영역)
 ----------------------------------- */
-.pain-points-section {
-    background-color: #0c0d12; 
-    padding: 150px 20px; 
-    display: flex;
-    justify-content: center;
-}
-
-.container {
-    max-width: 1200px;
-    width: 100%;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 80px;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-}
-
-.cards-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-    gap: 32px;
-}
+.pain-points-section { background-color: #0c0d12; padding: 150px 20px; display: flex; justify-content: center; }
+.container { max-width: 1200px; width: 100%; }
+.section-title { font-size: 2.5rem; font-weight: 700; color: #ffffff; text-align: center; margin-bottom: 80px; line-height: 1.4; letter-spacing: -0.02em; }
+.cards-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
 
 .card {
-    background: rgba(255, 255, 255, 0.02); 
-    border: 1px solid rgba(255, 255, 255, 0.05); 
-    border-radius: 16px; 
-    padding: 40px 32px;
+    background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px 32px;
     transition: transform 0.4s ease, background 0.4s ease, border-color 0.4s ease;
 }
 
-.card:hover {
-    background: rgba(255, 255, 255, 0.04);
-    transform: translateY(-8px); 
-    border-color: rgba(255, 255, 255, 0.15); 
-}
+.card:hover { background: rgba(255, 255, 255, 0.04); transform: translateY(-8px); border-color: rgba(255, 255, 255, 0.15); }
+.card-icon { font-size: 2.5rem; margin-bottom: 24px; }
+.card-title { font-size: 1.3rem; font-weight: 600; color: #ffffff; margin-bottom: 16px; }
+.card-desc { font-size: 1rem; color: #a0a0a5; line-height: 1.6; }
 
-.card-icon {
-    font-size: 2.5rem;
-    margin-bottom: 24px;
-}
-
-.card-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 16px;
-}
-
-.card-desc {
-    font-size: 1rem;
-    color: #a0a0a5; 
-    line-height: 1.6;
-}
-
-.reveal-item {
-    opacity: 0;
-    transform: translateY(20px);
-    filter: blur(10px); 
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out, filter 0.4s ease-out;
-}
-
+.reveal-item { opacity: 0; transform: translateY(20px); filter: blur(10px); transition: opacity 0.4s ease-out, transform 0.4s ease-out, filter 0.4s ease-out; }
 .reveal-item.active {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0); 
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 1; transform: translateY(0); filter: blur(0); 
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card.reveal-item:nth-child(1).active { transition-delay: 0.1s; }
@@ -467,186 +300,72 @@ body {
 
 
 /* =========================================
+   🚀 7번 기획: 시스템 부팅 시퀀스 (초고속 버전)
+========================================= */
+.boot-sequence {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #08080a; z-index: 9999; 
+    display: flex; align-items: center; justify-content: flex-start; padding-left: 8vw; 
+    animation: hideBoot 0.1s forwards; animation-delay: 1.0s;
+}
+
+.boot-terminal { font-family: 'Courier New', Courier, monospace; font-size: 1.1rem; color: #4CAF50; line-height: 2; }
+.boot-text { opacity: 0; animation: typeLine 0s forwards; }
+.text-1 { animation-delay: 0.1s; } .text-2 { animation-delay: 0.25s; } .text-3 { animation-delay: 0.4s; } .text-4 { animation-delay: 0.55s; color: #ffffff; font-weight: bold; } 
+
+.boot-flash {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; opacity: 0; pointer-events: none; 
+    animation: flashBang 0.4s ease-out forwards; animation-delay: 0.8s; 
+}
+
+@keyframes typeLine { to { opacity: 1; } }
+@keyframes flashBang { 0% { opacity: 0; } 10% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes hideBoot { to { opacity: 0; visibility: hidden; } }
+
+/* ⏳ 부팅 후 UI 등장 딜레이 */
+.kicker { animation-delay: 1.0s; } .giant-title { animation-delay: 1.2s; } .gnb { animation-delay: 1.3s; }
+.sub-title { animation-delay: 1.5s; } .cta-button { animation-delay: 1.7s; } .hud-elements { animation-delay: 2.0s; } .scroll-indicator { animation-delay: 2.2s; }
+
+/* 💡 고담 스타일 텍스트 동기화 */
+.gotham-statement-section .reveal-item.active { transition-duration: 1.5s; transition-delay: 0.2s; }
+
+
+/* =========================================
    📱 모바일 반응형
 ========================================= */
 @media (max-width: 768px) {
-    
-    /* GNB 모바일 최적화 */
-    .gnb { padding: 20px 24px; }
-    .gnb-logo { font-size: 1.2rem; }
-    .gnb-link { display: none; }
-    .gnb-button { padding: 8px 16px; font-size: 0.85rem; }
-
-    /* 히어로 섹션 정렬 변경 */
+    .gnb { padding: 20px 24px; } .gnb-logo { font-size: 1.2rem; } .gnb-link { display: none; } .gnb-button { padding: 8px 16px; font-size: 0.85rem; }
     .hero-section { align-items: flex-start; }
-    .hero-content {
-        text-align: left;
-        width: 100%; height: 100vh;
-        display: flex; flex-direction: column; justify-content: center; 
-        padding: 0 90px 0 24px; 
-    }
+    .hero-content { text-align: left; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 90px 0 24px; }
 
-    /* 왼쪽 시스템 데이터 라인 장식 */
-    .kicker {
-        font-size: 1rem; margin-bottom: 24px; word-break: keep-all; 
-        border-left: 2px solid rgba(255, 255, 255, 0.4); padding-left: 16px;
-    }
-    
-    .sub-title {
-        font-size: 0.9rem; margin-bottom: 40px; word-break: keep-all;
-        border-left: 2px solid rgba(255, 255, 255, 0.4); padding-left: 16px;
-    }
+    .kicker, .sub-title { word-break: keep-all; border-left: 2px solid rgba(255, 255, 255, 0.4); padding-left: 16px; }
+    .kicker { font-size: 1rem; margin-bottom: 24px; } .sub-title { font-size: 0.9rem; margin-bottom: 40px; }
+    .cta-button { align-self: flex-start; margin-left: 18px; padding: 12px 24px; font-size: 0.9rem; }
 
-    .cta-button {
-        align-self: flex-start; margin-left: 18px; 
-        padding: 12px 24px; font-size: 0.9rem;
-    }
-
-    /* 주인공 ARCHITECT (고담 스타일 회전) */
     .giant-title {
-        position: absolute; right: 15px; top: 0; bottom: 0; margin: auto; 
-        height: max-content; writing-mode: vertical-rl; 
-        animation: fadeUpRotate 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.4s; 
-        font-size: 12vh; letter-spacing: 0.02em; line-height: 1; color: rgba(255, 255, 255, 0.9); 
-        background: none; -webkit-text-fill-color: rgba(255, 255, 255, 0.9); filter: none;
+        position: absolute; right: 15px; top: 0; bottom: 0; margin: auto; height: max-content; writing-mode: vertical-rl; 
+        animation: fadeUpRotate 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 1.2s; 
+        font-size: 12vh; letter-spacing: 0.02em; line-height: 1; color: rgba(255, 255, 255, 0.9); background: none; -webkit-text-fill-color: rgba(255, 255, 255, 0.9); filter: none;
     }
 
-    @keyframes fadeUpRotate {
-        0% { opacity: 0; transform: rotate(180deg) translateY(-40px); }
-        100% { opacity: 1; transform: rotate(180deg) translateY(0); }
-    }
+    @keyframes fadeUpRotate { 0% { opacity: 0; transform: rotate(180deg) translateY(-40px); } 100% { opacity: 1; transform: rotate(180deg) translateY(0); } }
 
-    /* 💡 HUD 모바일 최적화 */
     .hud-line { width: 20px; height: 20px; }
-    .top-left { top: 16px; left: 16px; }
-    .top-right { top: 16px; right: 16px; }
-    .bottom-left { bottom: 16px; left: 16px; }
-    .bottom-right { bottom: 16px; right: 16px; }
-    
-    .hud-text { font-size: 0.65rem; }
-    .text-tl { top: 50px; left: 24px; }
-    .text-tr { display: none; } 
-    .text-bl { bottom: 20px; left: 24px; }
-    .text-br { bottom: 20px; right: 24px; }
+    .top-left, .top-right, .bottom-left, .bottom-right { top: 16px; left: 16px; bottom: auto; right: auto; }
+    .top-right { left: auto; right: 16px; } .bottom-left { top: auto; bottom: 16px; } .bottom-right { top: auto; bottom: 16px; left: auto; right: 16px; }
+    .hud-text { font-size: 0.65rem; } .text-tl { top: 50px; left: 24px; } .text-tr { display: none; } .text-bl { bottom: 20px; left: 24px; } .text-br { bottom: 20px; right: 24px; }
 
-    /* 페인 포인트 모바일 최적화 */
-    .pain-points-section { padding: 80px 20px; }
-    .section-title { font-size: 1.8rem; margin-bottom: 48px; word-break: keep-all; }
-    .cards-wrapper { grid-template-columns: 1fr; gap: 20px; }
-    .card { padding: 30px 24px; }
-    .card-icon { font-size: 2rem; margin-bottom: 16px; }
-    .card-title { font-size: 1.15rem; }
-    .card-desc { font-size: 0.95rem; }
+    .pain-points-section { padding: 80px 20px; } .section-title { font-size: 1.8rem; margin-bottom: 48px; word-break: keep-all; }
+    .cards-wrapper { grid-template-columns: 1fr; gap: 20px; } .card { padding: 30px 24px; }
+    .card-icon { font-size: 2rem; margin-bottom: 16px; } .card-title { font-size: 1.15rem; } .card-desc { font-size: 0.95rem; }
     
-    /* 모바일 영상 포커스 및 오버레이 */
     .hero-bg-video { object-position: 85% center; }
-    .hero-overlay {
-        /* 왼쪽 글자 가독성을 위해 0.95였던 수치를 0.8 정도로 살짝 낮추면 영상이 더 잘 보입니다 */
-        background: linear-gradient(to right, rgba(10, 10, 12, 0.8) 0%, rgba(10, 10, 12, 0.5) 50%, rgba(10, 10, 12, 0.1) 100%);
-    }
+    .hero-overlay { background: linear-gradient(to right, rgba(10, 10, 12, 0.8) 0%, rgba(10, 10, 12, 0.5) 50%, rgba(10, 10, 12, 0.1) 100%); }
 
-    /* 💡 고담 텍스트 모바일 최적화 */
-    .statement-header {
-        /* 🚨 모바일에서도 top: 40px; 삭제! */
-        padding: 0 10px;
-        margin-bottom: 30px; /* 거대 글씨와의 간격 */
-        font-size: 0.7rem;
-    }
-    .statement-header span:nth-child(2) {
-        display: none; /* 모바일에선 좁으니까 가운데 { ARCHITECT } 글자는 숨김 */
-    }
-    .statement-text {
-        font-size: 2.8rem; /* 모바일용 크기로 축소 */
-        word-break: keep-all; /* 단어 단위로 예쁘게 줄바꿈되도록 */
-    }
-}
-
-/* =========================================
-   🚀 7번 기획: 시스템 부팅 시퀀스 (초고속 버전)
-========================================= */
-
-/* 1. 화면 전체를 덮는 검은 터미널 배경 */
-.boot-sequence {
-    position: fixed; 
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    background-color: #08080a; 
-    z-index: 9999; 
+    .statement-header { padding: 0 10px; margin-bottom: 30px; font-size: 0.7rem; }
+    .statement-header span:nth-child(2) { display: none; }
+    .statement-text { font-size: 2.8rem; word-break: keep-all; }
     
-    display: flex;
-    align-items: center; justify-content: flex-start;
-    padding-left: 8vw; 
-    
-    /* 💡 기존 2.8초 -> 1.0초 만에 부팅 화면이 초고속으로 사라짐! */
-    animation: hideBoot 0.1s forwards;
-    animation-delay: 1.0s;
-}
-
-/* 2. 터미널 폰트 감성 (해커 스타일) */
-.boot-terminal {
-    font-family: 'Courier New', Courier, monospace; 
-    font-size: 1.1rem;
-    color: #4CAF50; 
-    line-height: 2;
-}
-
-.boot-text {
-    opacity: 0; 
-    animation: typeLine 0s forwards; 
-}
-
-/* 3. 글자들이 0.15초 간격으로 타다닥! 순식간에 뜸 */
-.text-1 { animation-delay: 0.1s; }
-.text-2 { animation-delay: 0.25s; }
-.text-3 { animation-delay: 0.4s; }
-.text-4 { animation-delay: 0.55s; color: #ffffff; font-weight: bold; } 
-
-/* 4. 부팅 완료 시 번쩍하는 섬광 (Flash Bang) 효과 */
-.boot-flash {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: #ffffff;
-    opacity: 0;
-    pointer-events: none; 
-    
-    /* 💡 텍스트가 다 뜬 직후(0.8초)에 번쩍! 하고 0.4초 만에 순삭 */
-    animation: flashBang 0.4s ease-out forwards;
-    animation-delay: 0.8s; 
-}
-
-/* --- 부팅 전용 애니메이션 키프레임 --- */
-@keyframes typeLine {
-    to { opacity: 1; }
-}
-
-@keyframes flashBang {
-    0% { opacity: 0; }
-    10% { opacity: 1; } 
-    100% { opacity: 0; }
-}
-
-@keyframes hideBoot {
-    to { opacity: 0; visibility: hidden; } 
-}
-
-
-/* =========================================
-   ⏳ 기존 UI 등장 시간(Delay) 초고속 버전으로 덮어쓰기
-   부팅이 끝나는 1초 직후부터 메인 UI가 바로 우수수 떨어짐
-========================================= */
-.kicker { animation-delay: 1.0s; }
-.giant-title { animation-delay: 1.2s; }
-.gnb { animation-delay: 1.3s; }
-.sub-title { animation-delay: 1.5s; }
-.cta-button { animation-delay: 1.7s; }
-.hud-elements { animation-delay: 2.0s; }
-.scroll-indicator { animation-delay: 2.2s; }
-
-/* 💡 고담 스타일 얇은 상단 텍스트가 흐릿함에서 아주 부드럽게 나타나도록 애니메이션 속도 조절 */
-/* 💡 고담 스타일: 상단 얇은 글씨와 중앙 거대 글씨가 '동시에' 나타나도록 타이밍 동기화 */
-.gotham-statement-section .reveal-item.active {
-    transition-duration: 1.5s; /* 1.5초 동안 아주 천천히, 웅장하게 선명해짐 */
-    transition-delay: 0.2s; /* 스크롤이 닿고 0.2초 뒤에 두 글씨가 동시에 등장! */
-}
-/* 모바일 전용 딜레이 덮어쓰기 */
-@media (max-width: 768px) {
-    .giant-title { animation-delay: 1.2s; }
+    .showcase-container { width: 90%; height: 60vh; border-radius: 20px; }
+    .showcase-text { left: 24px; bottom: 30px; }
+    .showcase-text h3 { font-size: 1.8rem; } .showcase-text p { font-size: 0.95rem; word-break: keep-all; }
 }
