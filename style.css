@@ -332,6 +332,56 @@ body {
     50% { opacity: 0.2; }
 }
 
+/* =========================================
+   💡 고담 스타일 브릿지 섹션 (거대 텍스트 연출)
+========================================= */
+.gotham-statement-section {
+    background-color: #050507; 
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    z-index: 30; 
+}
+
+/* 💡 두 글씨를 하나로 묶어주는 래퍼 (가운데 정렬) */
+.statement-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 고담 스타일 상단 얇은 텍스트 바 */
+.statement-header {
+    /* 🚨 1. position: absolute와 top: 60px을 완전히 지웠습니다! (천장 고정 해제) */
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    padding: 0 20px;
+    
+    /* 🚨 2. 거대 글씨와의 상하 간격 조절! (원하는 만큼 숫자를 줄이거나 늘려보세요) */
+    margin-bottom: 50px; 
+    
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.3); 
+    letter-spacing: 0.15em;
+}
+
+/* 정중앙 거대 텍스트 스타일 */
+.statement-text {
+    font-size: 5.5rem; 
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.1;
+    letter-spacing: -0.04em; 
+}
+
 /* -----------------------------------
    섹션 2: 페인 포인트 (스크롤 효과 영역)
 ----------------------------------- */
@@ -494,4 +544,109 @@ body {
         /* 왼쪽 글자 가독성을 위해 0.95였던 수치를 0.8 정도로 살짝 낮추면 영상이 더 잘 보입니다 */
         background: linear-gradient(to right, rgba(10, 10, 12, 0.8) 0%, rgba(10, 10, 12, 0.5) 50%, rgba(10, 10, 12, 0.1) 100%);
     }
+
+    /* 💡 고담 텍스트 모바일 최적화 */
+    .statement-header {
+        /* 🚨 모바일에서도 top: 40px; 삭제! */
+        padding: 0 10px;
+        margin-bottom: 30px; /* 거대 글씨와의 간격 */
+        font-size: 0.7rem;
+    }
+    .statement-header span:nth-child(2) {
+        display: none; /* 모바일에선 좁으니까 가운데 { ARCHITECT } 글자는 숨김 */
+    }
+    .statement-text {
+        font-size: 2.8rem; /* 모바일용 크기로 축소 */
+        word-break: keep-all; /* 단어 단위로 예쁘게 줄바꿈되도록 */
+    }
+}
+
+/* =========================================
+   🚀 7번 기획: 시스템 부팅 시퀀스 (초고속 버전)
+========================================= */
+
+/* 1. 화면 전체를 덮는 검은 터미널 배경 */
+.boot-sequence {
+    position: fixed; 
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: #08080a; 
+    z-index: 9999; 
+    
+    display: flex;
+    align-items: center; justify-content: flex-start;
+    padding-left: 8vw; 
+    
+    /* 💡 기존 2.8초 -> 1.0초 만에 부팅 화면이 초고속으로 사라짐! */
+    animation: hideBoot 0.1s forwards;
+    animation-delay: 1.0s;
+}
+
+/* 2. 터미널 폰트 감성 (해커 스타일) */
+.boot-terminal {
+    font-family: 'Courier New', Courier, monospace; 
+    font-size: 1.1rem;
+    color: #4CAF50; 
+    line-height: 2;
+}
+
+.boot-text {
+    opacity: 0; 
+    animation: typeLine 0s forwards; 
+}
+
+/* 3. 글자들이 0.15초 간격으로 타다닥! 순식간에 뜸 */
+.text-1 { animation-delay: 0.1s; }
+.text-2 { animation-delay: 0.25s; }
+.text-3 { animation-delay: 0.4s; }
+.text-4 { animation-delay: 0.55s; color: #ffffff; font-weight: bold; } 
+
+/* 4. 부팅 완료 시 번쩍하는 섬광 (Flash Bang) 효과 */
+.boot-flash {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #ffffff;
+    opacity: 0;
+    pointer-events: none; 
+    
+    /* 💡 텍스트가 다 뜬 직후(0.8초)에 번쩍! 하고 0.4초 만에 순삭 */
+    animation: flashBang 0.4s ease-out forwards;
+    animation-delay: 0.8s; 
+}
+
+/* --- 부팅 전용 애니메이션 키프레임 --- */
+@keyframes typeLine {
+    to { opacity: 1; }
+}
+
+@keyframes flashBang {
+    0% { opacity: 0; }
+    10% { opacity: 1; } 
+    100% { opacity: 0; }
+}
+
+@keyframes hideBoot {
+    to { opacity: 0; visibility: hidden; } 
+}
+
+
+/* =========================================
+   ⏳ 기존 UI 등장 시간(Delay) 초고속 버전으로 덮어쓰기
+   부팅이 끝나는 1초 직후부터 메인 UI가 바로 우수수 떨어짐
+========================================= */
+.kicker { animation-delay: 1.0s; }
+.giant-title { animation-delay: 1.2s; }
+.gnb { animation-delay: 1.3s; }
+.sub-title { animation-delay: 1.5s; }
+.cta-button { animation-delay: 1.7s; }
+.hud-elements { animation-delay: 2.0s; }
+.scroll-indicator { animation-delay: 2.2s; }
+
+/* 💡 고담 스타일 얇은 상단 텍스트가 흐릿함에서 아주 부드럽게 나타나도록 애니메이션 속도 조절 */
+/* 💡 고담 스타일: 상단 얇은 글씨와 중앙 거대 글씨가 '동시에' 나타나도록 타이밍 동기화 */
+.gotham-statement-section .reveal-item.active {
+    transition-duration: 1.5s; /* 1.5초 동안 아주 천천히, 웅장하게 선명해짐 */
+    transition-delay: 0.2s; /* 스크롤이 닿고 0.2초 뒤에 두 글씨가 동시에 등장! */
+}
+/* 모바일 전용 딜레이 덮어쓰기 */
+@media (max-width: 768px) {
+    .giant-title { animation-delay: 1.2s; }
 }
