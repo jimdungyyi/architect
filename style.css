@@ -78,6 +78,60 @@ body {
 
 .hero-content { position: relative; z-index: 10; padding: 0 20px; }
 
+/* =========================================
+   💡 공지사항 띠배너 (GNB 아래 배치 & 반투명 블러)
+========================================= */
+.top-announcement {
+    position: absolute;
+    top: 80px; /* 🚨 GNB 높이(약 80px)만큼 아래로 내림! */
+    left: 0; 
+    width: 100%;
+    height: 36px; 
+    
+    /* 🚨 딥다크 블랙 대신 반투명하게 설정해서 뒤의 배경 영상이 살짝 비치게 만듦 */
+    background-color: rgba(5, 5, 7, 0.4); 
+    backdrop-filter: blur(8px); /* 고급스러운 유리 질감 (블러) */
+    
+    border-top: 1px solid rgba(255, 255, 255, 0.08); /* 위아래 모두 얇고 투명한 테두리 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+    z-index: 150; 
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.marquee-container {
+    display: flex;
+    width: max-content;
+}
+
+.marquee-track {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    /* 🚨 30초 동안 왼쪽으로 스르륵 흘러가는 애니메이션 (숫자를 줄이면 빨라짐) */
+    animation: marqueeScroll 30s linear infinite; 
+    white-space: nowrap;
+}
+
+.marquee-track span {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7); /* 하얀 느낌이면서 눈이 안 아픈 부드러운 톤 */
+    letter-spacing: 0.05em;
+    font-weight: 500;
+}
+
+.marquee-track .divider {
+    color: var(--accent-green); /* 초록색으로 하이테크 느낌 한 방울 */
+    margin: 0 40px;
+    opacity: 0.5;
+}
+
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
 /* -----------------------------------
    💡 히어로 영역 텍스트 (PC 화면 최적화)
 ----------------------------------- */
@@ -270,6 +324,175 @@ body {
 .sub-title { animation-delay: 1.5s; } .cta-button { animation-delay: 1.7s; } .hud-elements { animation-delay: 2.0s; } .scroll-indicator { animation-delay: 2.2s; }
 
 /* =========================================
+   💡 벤토박스 기능 섹션 (Apple Style Grid)
+========================================= */
+.bento-features-section {
+    background-color: var(--bg-dark); /* 딥블랙에서 다시 살짝 밝은 블랙으로 전환 */
+    padding: 120px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.bento-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.bento-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.bento-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+}
+
+/* 🚨 벤토 그리드 마법! */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3칸으로 나누기 */
+    grid-template-rows: repeat(2, 300px); /* 세로 300px 두 줄 */
+    gap: 24px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* 개별 벤토 박스 기본 스타일 */
+.bento-box {
+    background: rgba(255, 255, 255, 0.03); /* 아주 투명한 흰색 (유리 질감) */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 32px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+}
+
+.bento-box:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* 은은한 네온 아우라 (박스 상단에 빛 번짐 효과) */
+.bento-box::before {
+    content: '';
+    position: absolute;
+    top: -50px; left: 50%;
+    transform: translateX(-50%);
+    width: 150px; height: 100px;
+    background: radial-gradient(ellipse, rgba(161, 196, 253, 0.2) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.bento-content {
+    position: relative;
+    z-index: 10;
+}
+
+.bento-icon { font-size: 2rem; margin-bottom: 20px; }
+.bento-box h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 12px; letter-spacing: -0.01em; }
+.bento-box p { font-size: 1rem; color: var(--text-muted); line-height: 1.6; word-break: keep-all; }
+
+/* 🚨 벤토 테트리스 사이즈 설정 */
+.bento-large { grid-column: span 2; grid-row: span 2; } /* 2x2 차지하는 왕건이 */
+.bento-medium { grid-column: span 1; grid-row: span 1; } /* 1x1 일반 사이즈 */
+.bento-wide { grid-column: span 3; height: 250px; } /* 아래에 가로로 길게 깔리는 3x1 사이즈 */
+
+/* 장식용 비주얼 효과 (가짜 레이더, 가짜 노드) */
+.bento-visual { position: absolute; z-index: 1; pointer-events: none; }
+
+.visual-radar { bottom: -20px; right: -20px; width: 250px; height: 250px; display: flex; align-items: center; justify-content: center; }
+.radar-circle { position: absolute; border: 1px solid rgba(161, 196, 253, 0.1); border-radius: 50%; }
+.radar-circle:nth-child(1) { width: 100px; height: 100px; border-color: rgba(161, 196, 253, 0.3); }
+.radar-circle:nth-child(2) { width: 180px; height: 180px; border-style: dashed; animation: rotateMesh 20s linear infinite; }
+.radar-circle:nth-child(3) { width: 260px; height: 260px; }
+
+.visual-nodes { bottom: 40px; right: 40px; display: flex; align-items: center; opacity: 0.5; }
+.node { width: 12px; height: 12px; background: #a1c4fd; border-radius: 50%; box-shadow: 0 0 15px #a1c4fd; }
+.node-line { width: 60px; height: 2px; background: linear-gradient(90deg, #a1c4fd, rgba(161, 196, 253, 0.1)); }
+
+/* =========================================
+   💡 생태계 호환성 무한 슬라이더
+========================================= */
+.tech-stack-section {
+    background-color: var(--bg-deep); /* 다크 배경 유지 */
+    padding: 100px 0; /* 슬라이더가 꽉 차게 보이도록 양옆 여백 제거 */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tech-stack-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 0 20px;
+}
+
+.tech-stack-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.tech-stack-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+}
+
+/* 🚨 무한 슬라이더 컨테이너 (양끝 페이드아웃 마법!) */
+.slider-container {
+    width: 100%;
+    max-width: 100vw;
+    display: flex;
+    /* 화면 양끝으로 갈수록 투명해지는 마스크 효과 */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+}
+
+.slider-track {
+    display: flex;
+    align-items: center;
+    gap: 80px; /* 로고 사이 간격 */
+    padding: 0 40px;
+    flex-shrink: 0;
+    /* 🚨 35초 동안 스르륵 지나감 */
+    animation: stackScroll 35s linear infinite;
+}
+
+/* 개별 기술 스택 로고(텍스트) */
+.tech-item {
+    font-size: 3rem; /* 큼직하게 */
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.1); /* 평소엔 희미하게 배경에 스며듦 */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.4s ease, transform 0.4s ease;
+    cursor: default;
+}
+
+/* 마우스를 올리면 하얗게 빛나며 살짝 커짐 */
+.tech-item:hover {
+    color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+}
+
+@keyframes stackScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* =========================================
    📱 모바일 반응형 (찌꺼기 제거 완료)
 ========================================= */
 @media (max-width: 768px) {
@@ -310,4 +533,23 @@ body {
     .showcase-container { width: 90%; height: 60vh; border-radius: 20px; }
     .showcase-text { left: 24px; bottom: 30px; }
     .showcase-text h3 { font-size: 1.8rem; } .showcase-text p { font-size: 0.95rem; word-break: keep-all; }
+
+    /* 💡 모바일용 벤토박스 수정 */
+    .bento-features-section { padding: 80px 20px; }
+    .bento-title { font-size: 1.8rem; word-break: keep-all; }
+    .bento-grid { 
+        display: flex; /* 그리드 풀고 플렉스로 위아래 쌓기 */
+        flex-direction: column; 
+        gap: 16px; 
+    }
+    .bento-large, .bento-medium, .bento-wide { 
+        height: auto; 
+        min-height: 250px; 
+    }
+
+    /* 💡 모바일용 테크 스택 슬라이더 수정 */
+    .tech-stack-section { padding: 60px 0; }
+    .tech-stack-title { font-size: 1.6rem; word-break: keep-all; }
+    .slider-track { gap: 40px; padding: 0 20px; animation-duration: 25s; /* 모바일에선 살짝 빠르게 */ }
+    .tech-item { font-size: 2rem; }
 }
