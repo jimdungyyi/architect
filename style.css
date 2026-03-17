@@ -552,4 +552,5 @@ body {
     .tech-stack-title { font-size: 1.6rem; word-break: keep-all; }
     .slider-track { gap: 40px; padding: 0 20px; animation-duration: 25s; /* 모바일에선 살짝 빠르게 */ }
     .tech-item { font-size: 2rem; }
+
 }
