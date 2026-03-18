@@ -646,6 +646,17 @@ body {
     50% { opacity: 0; }
 }
 
+/* 💡 강조 텍스트 디테일 */
+strong { font-weight: 700; color: #ffffff; } /* 매시 카드는 어두운 글씨이므로, 매시 카드 안의 strong은 별도로 color: #000; 설정 필요 */
+.model-specs strong { color: #000000; }
+
+/* 💡 벤토박스 아이콘 쫀득한 애니메이션 */
+.bento-icon { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; }
+.bento-box:hover .bento-icon { transform: scale(1.2) rotate(-10deg); }
+
+/* style.css 파일의 터미널 색상 영역에 추가 */
+.output.success { color: #3fb950; font-weight: bold; }
+
 /* =========================================
    📱 모바일 반응형 (찌꺼기 제거 완료)
 ========================================= */
