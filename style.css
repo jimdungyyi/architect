@@ -419,6 +419,7 @@ body {
 .node { width: 12px; height: 12px; background: #a1c4fd; border-radius: 50%; box-shadow: 0 0 15px #a1c4fd; }
 .node-line { width: 60px; height: 2px; background: linear-gradient(90deg, #a1c4fd, rgba(161, 196, 253, 0.1)); }
 
+
 /* =========================================
    💡 생태계 호환성 무한 슬라이더
 ========================================= */
@@ -493,6 +494,159 @@ body {
 }
 
 /* =========================================
+   💡 7단계: 퀵 스타트 터미널 & 데이터 노드 배경
+========================================= */
+.quick-start-section {
+    position: relative;
+    background-color: var(--bg-deep); /* 다크 배경 이어짐 */
+    padding: 150px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 🌐 배경 노드 맵 애니메이션 */
+.global-node-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    opacity: 0.6; /* 은은하게 비치도록 */
+    pointer-events: none;
+}
+
+/* 빛나는 데이터 점(노드) */
+.map-node {
+    position: absolute;
+    width: 6px; height: 6px;
+    background-color: #a1c4fd;
+    border-radius: 50%;
+    box-shadow: 0 0 15px 4px rgba(161, 196, 253, 0.4);
+    animation: pulseNode 3s infinite alternate;
+}
+
+/* 점들의 무작위 위치 설정 */
+.n1 { top: 20%; left: 15%; animation-delay: 0s; }
+.n2 { top: 35%; left: 80%; animation-delay: 0.5s; }
+.n3 { top: 65%; left: 25%; animation-delay: 1s; }
+.n4 { top: 75%; left: 85%; animation-delay: 1.5s; }
+.n5 { top: 45%; left: 50%; animation-delay: 2s; }
+
+/* 데이터가 흘러가는 선 */
+.map-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(161, 196, 253, 0.5), transparent);
+    transform-origin: left center;
+    background-size: 200% 100%;
+    animation: dataFlow 4s infinite linear;
+}
+
+/* 선들의 위치와 각도 연결 */
+.l1 { top: 20%; left: 15%; width: 35%; transform: rotate(25deg); }
+.l2 { top: 65%; left: 25%; width: 25%; transform: rotate(-35deg); }
+.l3 { top: 45%; left: 50%; width: 30%; transform: rotate(-15deg); animation-delay: 1s; }
+.l4 { top: 35%; left: 80%; width: 20%; transform: rotate(100deg); animation-delay: 2s; }
+
+@keyframes pulseNode {
+    0% { transform: scale(1); opacity: 0.3; }
+    100% { transform: scale(2.5); opacity: 1; }
+}
+
+@keyframes dataFlow {
+    0% { background-position: 100% 0; opacity: 0; }
+    50% { opacity: 1; }
+    100% { background-position: -100% 0; opacity: 0; }
+}
+
+/* 💻 터미널 UI 스타일 */
+.quick-start-section .container {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quick-start-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.quick-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 20px rgba(0,0,0,0.8); /* 텍스트가 배경 선에 안 묻히도록 그림자 추가 */
+}
+
+.quick-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+}
+
+.terminal-window {
+    width: 100%;
+    background-color: #0d0d12;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(161, 196, 253, 0.05);
+    backdrop-filter: blur(10px); /* 뒤에 지나가는 레이저 선이 예쁘게 굴절됨 */
+}
+
+.term-header {
+    background-color: #1a1b23;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mac-dots { display: flex; gap: 8px; margin-right: 20px; }
+.mac-dots span { width: 12px; height: 12px; border-radius: 50%; }
+.mac-dots span:nth-child(1) { background-color: #ff5f56; } /* 빨강 */
+.mac-dots span:nth-child(2) { background-color: #ffbd2e; } /* 노랑 */
+.mac-dots span:nth-child(3) { background-color: #27c93f; } /* 초록 */
+
+.term-tab { color: #8b949e; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; }
+
+.term-body {
+    padding: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #c9d1d9;
+    text-align: left;
+    width: 100%;
+}
+
+/* 해커 스타일 코드 색상 (Syntax Highlighting) */
+.prompt { color: #3fb950; margin-right: 12px; font-weight: bold; }
+.command { color: #58a6ff; }
+.pkg { color: #e3b341; }
+.arg { color: #a5d6ff; }
+.comment { color: #8b949e; }
+.output { color: #8b949e; font-size: 0.95rem; margin-top: 4px; }
+
+/* 깜빡이는 커서 */
+.cursor {
+    display: inline-block;
+    width: 10px; height: 1.15rem;
+    background-color: #c9d1d9;
+    vertical-align: middle;
+    animation: blinkCursor 1s step-end infinite;
+}
+
+@keyframes blinkCursor {
+    50% { opacity: 0; }
+}
+
+/* =========================================
    📱 모바일 반응형 (찌꺼기 제거 완료)
 ========================================= */
 @media (max-width: 768px) {
@@ -552,5 +706,10 @@ body {
     .tech-stack-title { font-size: 1.6rem; word-break: keep-all; }
     .slider-track { gap: 40px; padding: 0 20px; animation-duration: 25s; /* 모바일에선 살짝 빠르게 */ }
     .tech-item { font-size: 2rem; }
+
+    /* 💡 모바일용 퀵 스타트 터미널 수정 */
+    .quick-start-section { padding: 80px 20px; }
+    .quick-title { font-size: 1.8rem; word-break: keep-all; }
+    .terminal-window .term-body { padding: 24px; font-size: 0.95rem; }
 
 }
